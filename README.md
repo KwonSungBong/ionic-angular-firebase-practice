@@ -10,3 +10,4 @@ npm install angularfire2 firebase --save
 회원가입
 톡리스트
 위치, 최근
+푸쉬
