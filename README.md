@@ -6,6 +6,10 @@ ionic start ahtalk blank
 
 npm install angularfire2 firebase --save
 
+http://ionicframework.com/docs/components/#overview
+
+https://www.joshmorony.com/a-simple-guide-to-navigation-in-ionic-2/
+
 로그인
 회원가입
 톡리스트
