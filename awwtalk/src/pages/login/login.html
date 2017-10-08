@@ -17,6 +17,9 @@
       <ion-input type="password"></ion-input>
     </ion-item>
   </ion-list>
-  <button ion-button block (click)="login()">로그인</button>
+  <button ion-button block (click)="loginWithAnonymous()">익명로그인</button>
+  <button ion-button block (click)="loginWithEmail()">이메일로그인</button>
+  <button ion-button block (click)="loginWithFacebook()">페이스북 로그인</button>
+  <button ion-button block (click)="loginWithGoogle()">구글 로그인</button>
   <button ion-button block (click)="join()">회원가입</button>
 </ion-content>
