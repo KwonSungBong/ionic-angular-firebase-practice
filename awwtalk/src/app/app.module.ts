@@ -6,7 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
-import { JoinPage } from '../pages/join/join';
+import { JoinWithEmailPage } from '../pages/joinWithEmail/joinWithEmail';
+import { LoginWithEmailPage } from '../pages/loginWithEmail/loginWithEmail';
 import { HomePage } from '../pages/home/home';
 
 import { AngularFireModule } from 'angularfire2';
@@ -26,7 +27,8 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     LoginPage,
-    JoinPage,
+    JoinWithEmailPage,
+    LoginWithEmailPage,
     HomePage
   ],
   imports: [
@@ -40,7 +42,8 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     LoginPage,
-    JoinPage,
+    JoinWithEmailPage,
+    LoginWithEmailPage,
     HomePage
   ],
   providers: [

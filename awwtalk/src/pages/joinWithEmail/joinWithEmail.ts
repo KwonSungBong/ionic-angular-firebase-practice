@@ -4,10 +4,10 @@ import { AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
-  selector: 'page-join',
-  templateUrl: 'join.html'
+  selector: 'page-join-with-email',
+  templateUrl: 'joinWithEmail.html'
 })
-export class JoinPage {
+export class JoinWithEmailPage {
 
   constructor(public navCtrl: NavController,
               private afAuth: AngularFireAuth,
@@ -20,7 +20,7 @@ export class JoinPage {
     this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(res => this.navCtrl.pop())
-      .catch(function(error) {
+      .catch((error) => {
         let alert = this.alertCtrl.create({
           title: error.name,
           subTitle: error.message,

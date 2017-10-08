@@ -6,7 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 import { HomePage } from '../home/home';
-import { JoinPage } from '../join/join';
+import { LoginWithEmailPage } from '../loginWithEmail/loginWithEmail';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -20,24 +20,7 @@ export class LoginPage {
   }
 
   loginWithEmail() {
-    const email="rnjstjdqhd39@naver.com";
-    const password="rnjstjdqhd39@";
-
-    this.afAuth.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log(res)
-        this.app.getRootNav().setRoot(HomePage)
-      })
-      .catch((error) => {
-        let alert = this.alertCtrl.create({
-          title: error.name,
-          subTitle: error.message,
-          buttons: ['OK']
-        });
-        alert.present()
-        console.log(error)
-      });
+    this.navCtrl.push(LoginWithEmailPage)
   }
 
   loginWithAnonymous() {
@@ -92,10 +75,6 @@ export class LoginPage {
         alert.present()
         console.log(error)
       });
-  }
-
-  join() {
-    this.navCtrl.push(JoinPage)
   }
 
 }
