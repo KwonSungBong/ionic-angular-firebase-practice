@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      talk
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p *ngFor="let message of messages">
+    {{ message }}
+  </p>
+</ion-content>
+<ion-footer>
+  <ion-textarea placeholder="Enter a talk" [(ngModel)]="message"></ion-textarea>
+  <button ion-button block (click)="sendMessage()">전송</button>
+</ion-footer>

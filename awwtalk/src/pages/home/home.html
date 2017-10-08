@@ -12,5 +12,9 @@
 </ion-header>
 
 <ion-content padding>
-  testtest
+  <ion-list>
+    <button ion-item *ngFor="let talk of talks" (click)="selectTalk(talk)">
+      {{ talk }}
+    </button>
+  </ion-list>
 </ion-content>

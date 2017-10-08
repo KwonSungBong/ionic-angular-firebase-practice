@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { JoinWithEmailPage } from '../pages/joinWithEmail/joinWithEmail';
 import { LoginWithEmailPage } from '../pages/loginWithEmail/loginWithEmail';
 import { HomePage } from '../pages/home/home';
+import { TalkPage } from '../pages/talk/talk';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
@@ -29,7 +30,8 @@ export const firebaseConfig = {
     LoginPage,
     JoinWithEmailPage,
     LoginWithEmailPage,
-    HomePage
+    HomePage,
+    TalkPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ export const firebaseConfig = {
     LoginPage,
     JoinWithEmailPage,
     LoginWithEmailPage,
-    HomePage
+    HomePage,
+    TalkPage
   ],
   providers: [
     StatusBar,
