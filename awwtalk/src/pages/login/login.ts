@@ -27,7 +27,7 @@ export class LoginPage {
     this.afAuth.auth
       .signInAnonymously()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.app.getRootNav().setRoot(HomePage)
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ export class LoginPage {
     this.afAuth.auth
       .signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.app.getRootNav().setRoot(HomePage)
       })
       .catch((error) => {
@@ -63,7 +63,7 @@ export class LoginPage {
     this.afAuth.auth
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.app.getRootNav().setRoot(HomePage)
       })
       .catch((error) => {

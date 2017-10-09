@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      talk
+      {{talk.subject}}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -11,6 +11,7 @@
     {{ message }}
   </p>
 </ion-content>
+
 <ion-footer>
   <ion-textarea placeholder="Enter a talk" [(ngModel)]="message"></ion-textarea>
   <button ion-button block (click)="sendMessage()">전송</button>

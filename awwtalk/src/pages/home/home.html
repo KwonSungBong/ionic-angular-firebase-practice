@@ -13,8 +13,25 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let talk of talks" (click)="selectTalk(talk)">
-      {{ talk }}
+    <button ion-item *ngFor="let item of items" (click)="selectTalk(item)">
+      {{ item.subject }}
     </button>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="selectRandomTalk()">
+          <ion-icon name="contract"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block (click)="createTalk()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

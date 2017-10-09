@@ -1,40 +1,79 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { App } from "ionic-angular";
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-// import { Observable } from 'rxjs/Observable';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 import { LoginPage } from '../login/login';
 import { TalkPage } from '../talk/talk';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  // items: Observable<any[]>;
-  talks: string[];
+  itemsRef: FirebaseListObservable<any[]>;
+  items: any[] = [];
 
   constructor(public navCtrl: NavController,
+              public alertCtrl: AlertController,
               protected app: App,
               private afAuth: AngularFireAuth,
-              afDB: AngularFireDatabase) {
-    this.talks = ["1","2","3","4","5","6",
-      "11","22","33","44","55","66",
-      "111","222","333","444","555","666",
-      "1111","2222","3333","4444","5555","6666",
-      "11111","22222","33333","44444","55555","66666",
-      "111111","222222","333333","4444444","5555555","666666"]
+              public afDB: AngularFireDatabase) {
+    this.itemsRef = this.afDB.list('talks');
+    this.afDB.list('talks').forEach(data => this.items = data);
   }
 
   logout() {
     this.afAuth.auth.signOut().then(data => {
-      this.app.getRootNav().setRoot(LoginPage)
+      this.app.getRootNav().setRoot(LoginPage);
     })
   }
 
+  enterTalk(talk) {
+    this.navCtrl.push(TalkPage, talk);
+  }
+
   selectTalk(talk) {
-    this.navCtrl.push(TalkPage)
+    this.enterTalk(talk);
+  }
+
+  selectRandomTalk() {
+    this.enterTalk(this.items[0]);
+  }
+
+  createTalk() {
+    let prompt = this.alertCtrl.create({
+      title: '대화',
+      message: "제목을 입력하세요",
+      inputs: [
+        {
+          name: 'subject',
+          placeholder: 'subject'
+        },
+      ],
+      buttons: [
+        {
+          text: '취소',
+          handler: data => {}
+        },
+        {
+          text: '완료',
+          handler: data => {
+            if(data.subject == "") return false;
+            const subject: string = data.subject;
+            const createdDate = Date.now();
+            let item = {subject: subject, messages: [], createdDate: createdDate, numberOfConnections: 1}
+            this.itemsRef.push(item).then(data => {
+              const result = this.afDB.object('/talks/' + data.key);
+              result.forEach(data => item = data);
+              this.enterTalk(item);
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
 }
