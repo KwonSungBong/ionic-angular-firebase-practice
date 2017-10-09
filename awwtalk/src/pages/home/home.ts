@@ -21,7 +21,9 @@ export class HomePage {
               private afAuth: AngularFireAuth,
               public afDB: AngularFireDatabase) {
     this.itemsRef = this.afDB.list('talks');
-    this.afDB.list('talks').forEach(data => this.items = data);
+    this.afDB.list('talks').forEach(data => {
+      this.items = data.filter(item => item.numberOfConnections == 1);
+    });
   }
 
   logout() {
@@ -31,6 +33,7 @@ export class HomePage {
   }
 
   enterTalk(talk) {
+    // this.itemsRef.update(talk.$key, {numberOfConnections:2})
     this.navCtrl.push(TalkPage, talk);
   }
 
@@ -39,7 +42,8 @@ export class HomePage {
   }
 
   selectRandomTalk() {
-    this.enterTalk(this.items[0]);
+    const talk = this.items[0];
+    this.enterTalk(talk);
   }
 
   createTalk() {
@@ -63,7 +67,19 @@ export class HomePage {
             if(data.subject == "") return false;
             const subject: string = data.subject;
             const createdDate = Date.now();
-            let item = {subject: subject, messages: [], createdDate: createdDate, numberOfConnections: 1}
+            const createdUser = this.afAuth.auth.currentUser.uid;
+            // const message = {
+            //   createdUser: createdUser,
+            //   message: "초기"
+            // };
+            let item = {
+              subject: subject,
+              createdDate: createdDate,
+              createdUser: createdUser,
+              numberOfConnections: 1,
+              // messages: [message]
+            };
+
             this.itemsRef.push(item).then(data => {
               const result = this.afDB.object('/talks/' + data.key);
               result.forEach(data => item = data);

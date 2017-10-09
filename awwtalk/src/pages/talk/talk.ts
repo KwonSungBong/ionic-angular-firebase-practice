@@ -1,6 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import { Content } from 'ionic-angular';
+import {AngularFireAuth} from "angularfire2/auth";
+import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 
 @Component({
   selector: 'page-talk',
@@ -8,18 +10,30 @@ import { Content } from 'ionic-angular';
 })
 export class TalkPage {
   @ViewChild(Content) content: Content;
+  createdUser: any;
   talk: any;
-  messages: string[];
   message: string = "";
+  itemsRef: FirebaseListObservable<any[]>;
+  items: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private afAuth: AngularFireAuth,
+              public afDB: AngularFireDatabase) {
     console.log("talk", navParams);
+    this.createdUser = this.afAuth.auth.currentUser.uid;
     this.talk = navParams.data;
-    this.messages = ["1asdasdsad","2asdasdsad","3asdasdsad","4asdasdsad","5asdasdsad",
-      "6asdasdsad","7asdasdsad","8asdasdsad","9asdasdsad","10asdasdsad","11asdasdsad",
-      "12asdasdsad","13asdasdsad","14asdasdsad","15asdasdsad","16asdasdsad","17asdasdsad",
-      "19asdasdsad","20asdasdsad","21asdasdsad","22asdasdsad","23asdasdsad","24asdasdsad",
-      "25asdasdsad","26asdasdsad","27asdasdsad","28asdasdsad","29asdasdsad","30asdasdsad"];
+    this.itemsRef = this.afDB.list('messages');
+
+    this.itemsRef.set(this.talk.$key, [{
+      createdUser: this.createdUser,
+      message: "입장하였습니다."
+    }]);
+
+    this.afDB.object('/messages/' + this.talk.$key).forEach(data => {
+      this.items = data;
+      console.log(data, this.items);
+    });
   }
 
   ngAfterViewInit() {
@@ -37,11 +51,17 @@ export class TalkPage {
   }
 
   sendMessage() {
-    this.messages.push(this.message);
-    this.message = "";
+    const data = {
+      createdUser: this.createdUser,
+      message: this.message
+    };
+
+    this.items.push(data);
+    this.afDB.object('/messages/' + this.talk.$key).update(this.items);
 
     setTimeout(() => {
-      this.content.scrollToBottom(0)
+      this.message = "";
+      this.content.scrollToBottom(0);
     }, 10);
   }
 
