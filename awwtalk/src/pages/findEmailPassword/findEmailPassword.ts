@@ -3,12 +3,11 @@ import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { HomePage } from '../home/home';
 @Component({
-  selector: 'page-join-with-email',
-  templateUrl: 'joinWithEmail.html'
+  selector: 'page-find-email-password',
+  templateUrl: 'findEmailPassword.html'
 })
-export class JoinWithEmailPage {
+export class FindEmailPasswordPage {
 
   constructor(public navCtrl: NavController,
               private afAuth: AngularFireAuth,
@@ -17,15 +16,16 @@ export class JoinWithEmailPage {
 
   complete() {
     const email="rnjstjdqhd39@naver.com";
-    const password="rnjstjdqhd39@";
     this.afAuth.auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        user.sendEmailVerification().then(() => {
-          this.afAuth.auth.signOut().then(() => {
-            this.navCtrl.pop();
-          })
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        let alert = this.alertCtrl.create({
+          title: "비밀번호 재설정 이메일을 발송하였습니다.",
+          subTitle: "이메일을 확인하여 비밀번호를 재설정해주세요.",
+          buttons: ['OK']
         });
+        alert.present();
+        this.navCtrl.pop();
       })
       .catch((error) => {
         let alert = this.alertCtrl.create({

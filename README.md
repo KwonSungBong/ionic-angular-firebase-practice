@@ -10,6 +10,8 @@ http://ionicframework.com/docs/components/#overview
 
 https://www.joshmorony.com/a-simple-guide-to-navigation-in-ionic-2/
 
+https://firebase.google.com/docs/auth/web/manage-users
+
 로그인
 회원가입
 톡리스트

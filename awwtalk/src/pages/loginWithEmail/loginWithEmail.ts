@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { HomePage } from '../home/home';
 import { JoinWithEmailPage } from '../joinWithEmail/joinWithEmail';
+import { FindEmailPasswordPage } from '../findEmailPassword/findEmailPassword';
 @Component({
   selector: 'page-login-with-email',
   templateUrl: 'loginWithEmail.html'
@@ -24,9 +25,19 @@ export class LoginWithEmailPage {
 
     this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log(res)
-        this.app.getRootNav().setRoot(HomePage)
+      .then(user => {
+        if(user.emailVerified){
+          this.app.getRootNav().setRoot(HomePage);
+        } else {
+          this.afAuth.auth.signOut().then(() => {
+            let alert = this.alertCtrl.create({
+              title: "이메일 인증 대기중입니다.",
+              subTitle: "이메일 인증링크를 클릭해 주세요.",
+              buttons: ['OK']
+            });
+            alert.present();
+          })
+        }
       })
       .catch((error) => {
         let alert = this.alertCtrl.create({
@@ -43,8 +54,12 @@ export class LoginWithEmailPage {
     this.navCtrl.pop();
   }
 
-  JoinWithEmailPage() {
+  joinWithEmailPage() {
     this.navCtrl.push(JoinWithEmailPage)
+  }
+
+  findEmailPasswordPage() {
+    this.navCtrl.push(FindEmailPasswordPage)
   }
 
 }

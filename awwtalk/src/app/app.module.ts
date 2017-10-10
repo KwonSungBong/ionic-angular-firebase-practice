@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { JoinWithEmailPage } from '../pages/joinWithEmail/joinWithEmail';
 import { LoginWithEmailPage } from '../pages/loginWithEmail/loginWithEmail';
+import { FindEmailPasswordPage } from '../pages/findEmailPassword/findEmailPassword';
 import { HomePage } from '../pages/home/home';
 import { TalkPage } from '../pages/talk/talk';
 
@@ -30,6 +31,7 @@ export const firebaseConfig = {
     LoginPage,
     JoinWithEmailPage,
     LoginWithEmailPage,
+    FindEmailPasswordPage,
     HomePage,
     TalkPage
   ],
@@ -46,6 +48,7 @@ export const firebaseConfig = {
     LoginPage,
     JoinWithEmailPage,
     LoginWithEmailPage,
+    FindEmailPasswordPage,
     HomePage,
     TalkPage
   ],
