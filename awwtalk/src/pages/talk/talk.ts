@@ -27,7 +27,8 @@ export class TalkPage {
 
     this.itemsRef.set(this.talk.$key, [{
       createdUser: this.createdUser,
-      message: "입장하였습니다."
+      message: "입장하였습니다.",
+      createdDate: Date.now()
     }]);
 
     this.afDB.object('/messages/' + this.talk.$key).forEach(data => {
@@ -53,7 +54,8 @@ export class TalkPage {
   sendMessage() {
     const data = {
       createdUser: this.createdUser,
-      message: this.message
+      message: this.message,
+      createdDate: Date.now()
     };
 
     this.items.push(data);
