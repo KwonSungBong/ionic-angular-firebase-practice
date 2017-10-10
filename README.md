@@ -14,6 +14,8 @@ https://firebase.google.com/docs/auth/web/manage-users
 
 https://medium.com/@christophewillemsen/voice-driven-mobile-apps-with-ionic-and-the-speech-recognition-cordova-plugin-8aa64ad5edcb
 
+https://github.com/rajayogan/ionic3chat-ep9
+
 로그인
 회원가입
 톡리스트
