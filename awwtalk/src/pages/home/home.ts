@@ -33,7 +33,7 @@ export class HomePage {
   }
 
   enterTalk(talk) {
-    // this.itemsRef.update(talk.$key, {numberOfConnections:2})
+    this.itemsRef.update(talk.$key, {numberOfConnections: ++talk.numberOfConnections});
     this.navCtrl.push(TalkPage, talk);
   }
 
@@ -68,16 +68,11 @@ export class HomePage {
             const subject: string = data.subject;
             const createdDate = Date.now();
             const createdUser = this.afAuth.auth.currentUser.uid;
-            // const message = {
-            //   createdUser: createdUser,
-            //   message: "초기"
-            // };
             let item = {
               subject: subject,
               createdDate: createdDate,
               createdUser: createdUser,
-              numberOfConnections: 1,
-              // messages: [message]
+              numberOfConnections: 1
             };
 
             this.itemsRef.push(item).then(data => {

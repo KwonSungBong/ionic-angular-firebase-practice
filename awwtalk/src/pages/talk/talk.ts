@@ -25,6 +25,11 @@ export class TalkPage {
     this.talk = navParams.data;
     this.itemsRef = this.afDB.list('messages');
 
+    this.afDB.object('/messages/' + this.talk.$key).forEach(data => {
+      this.items = data;
+      console.log(data, this.items);
+    });
+
     this.itemsRef.set(this.talk.$key, [{
       createdUser: this.createdUser,
       message: "입장하였습니다.",
@@ -48,6 +53,12 @@ export class TalkPage {
   ionViewWillEnter(): void {
     setTimeout(() => {
       this.content.scrollToBottom(0)
+    }, 10);
+  }
+
+  ionViewWillLeave() {
+    this.afDB.object('/talks/' + this.talk.$key).update({
+      numberOfConnections: --this.talk.numberOfConnections
     });
   }
 
