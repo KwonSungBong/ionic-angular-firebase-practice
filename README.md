@@ -16,6 +16,8 @@ https://medium.com/@christophewillemsen/voice-driven-mobile-apps-with-ionic-and-
 
 https://github.com/rajayogan/ionic3chat-ep9
 
+https://ionicframework.com/docs/native/geolocation/
+
 로그인
 회원가입
 톡리스트
