@@ -4,6 +4,11 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { CodePush } from '@ionic-native/code-push';
+import { Geolocation } from '@ionic-native/geolocation';
+import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { FCM } from '@ionic-native/fcm';
+
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { JoinWithEmailPage } from '../pages/joinWithEmail/joinWithEmail';
@@ -55,6 +60,10 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    CodePush,
+    Geolocation,
+    SpeechRecognition,
+    FCM,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
