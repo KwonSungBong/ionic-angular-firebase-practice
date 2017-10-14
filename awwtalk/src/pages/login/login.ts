@@ -17,6 +17,8 @@ export class LoginPage {
               protected app: App,
               private afAuth: AngularFireAuth,
               public alertCtrl: AlertController) {
+    afAuth.auth.setPersistence("local");
+
   }
 
   loginWithEmail() {

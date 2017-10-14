@@ -72,7 +72,7 @@ export class HomePage {
               subject: subject,
               createdDate: createdDate,
               createdUser: createdUser,
-              numberOfConnections: 1
+              numberOfConnections: 0
             };
 
             this.itemsRef.push(item).then(data => {

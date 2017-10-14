@@ -20,15 +20,9 @@ export class TalkPage {
               public navParams: NavParams,
               private afAuth: AngularFireAuth,
               public afDB: AngularFireDatabase) {
-    console.log("talk", navParams);
     this.createdUser = this.afAuth.auth.currentUser.uid;
     this.talk = navParams.data;
     this.itemsRef = this.afDB.list('messages');
-
-    this.afDB.object('/messages/' + this.talk.$key).forEach(data => {
-      this.items = data;
-      console.log(data, this.items);
-    });
 
     this.itemsRef.set(this.talk.$key, [{
       createdUser: this.createdUser,
@@ -38,14 +32,17 @@ export class TalkPage {
 
     this.afDB.object('/messages/' + this.talk.$key).forEach(data => {
       this.items = data;
-      console.log(data, this.items);
+
+      setTimeout(() => {
+        this.content.scrollToBottom(0)
+      }, 10);
     });
   }
 
   ngAfterViewInit() {
     this.content.ionScrollEnd.subscribe((data)=>{
       if(data.scrollTop == 0) {
-        console.log("TOP")
+        // console.log("TOP")
       }
     });
   }

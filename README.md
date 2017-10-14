@@ -27,3 +27,12 @@ https://ionicframework.com/docs/native/geolocation/
 ######################################################
 
 http://ionicframework.com/docs/v1/guide/testing.html
+
+######################################################
+
+ionic cordova build ios
+ionic cordova emulate ios
+
+ionic cordova run android
+
+######################################################
