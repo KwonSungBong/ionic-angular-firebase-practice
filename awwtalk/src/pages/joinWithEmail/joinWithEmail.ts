@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { HomePage } from '../home/home';
 @Component({
   selector: 'page-join-with-email',
   templateUrl: 'joinWithEmail.html'
