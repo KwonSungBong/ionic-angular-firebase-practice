@@ -23,3 +23,7 @@ https://ionicframework.com/docs/native/geolocation/
 톡리스트
 위치, 최근
 푸쉬
+
+######################################################
+
+http://ionicframework.com/docs/v1/guide/testing.html
